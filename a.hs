@@ -175,3 +175,20 @@ fizzBuzz xs =
       else if x `mod` 3 == 0 then "Fizz"
       else if x `mod` 5 == 0 then "Buzz"
       else (show x))) xs
+
+nonZero n = n /= 0
+
+-- compactCount returns the count of non-zero numbers.
+compactCount numbers = sum [1 | n <- numbers, nonZero n]
+
+-- A list comprehension may have multiple predicates, and only elements that satisfy all predicates
+-- will be fed to the output function.
+listMultiConditions = [x | x <- [1..20], x /= 11, x /= 14, (odd x || x >= 7)]
+
+-- A list comprehension may have multiple source lists, separated by commas. The cartesian product of
+-- the lists is used for the predicates and output.
+listMultiSources = [(x,y) | x <- [1,2,3], y <- [5,6]]
+
+adjectivesNouns = [adj ++ " " ++ noun | adj <- ["silly", "jovial", "empty"], noun <- ["book", "engineer"]]
+
+elemCount numbers = sum [1 | _ <- numbers]
