@@ -134,3 +134,44 @@ cycleMyList = cycle [2, 67, 23]
 
 -- But if you take only some elements, it does what you expect:
 cycleTakeSome = take 15 (cycle [2, 67, 23])
+
+cycleWord3 = take (length "Wow " * 3 - 1) (cycle "Wow ") -- This is "Wow Wow Wow"
+
+-- The function "repeat" takes a value and returns an infinite list of that element.
+-- Don't try to evaluate this in GHCI.
+infinite7 = repeat 7
+
+infinite7taken = take 40 infinite7
+
+infiniteEmptyListTaken = take 3 $ repeat []
+
+-- Instead of "take" with "repeat" you should just use "replicate" which repeats an element a
+-- specified number of times.
+replicate7 = replicate 40 7 -- This is a 40-element list of the value 7.
+
+-- The type of "replicate":
+-- replicate :: Int -> a -> [a]
+
+-- List comprehensions.
+-- The following is a list taking values from 1..10 that satisfy condition x*2 >= 12 and then doubled.
+doublesFrom1to10filtered = [x*2 | x <- [1..10], x*2 >= 12]
+
+-- You can omit the predicate (the last term, after comma).
+numsPlus3 = [x + 3 | x <- [1..10]]
+
+-- List comprehensions are useful when a range isn't sufficient because the predicate or operation
+-- done on the elements is non-trivial.
+oddsBetween50and80 = [x | x <- [50..80], (x `mod` 2) /= 0]
+
+listComprehensionWithConditional =
+  [if x < 10 then ("small", x) else ("big", x) | x <- [1..25], odd x]
+
+-- The function "odd" returns whether the integer it's called with is odd.
+
+fizzBuzz :: (Integral e, Show e) => [e] -> IO ()
+fizzBuzz xs =
+  mapM_ (\x -> putStrLn (
+    if x `mod` 3 == 0 && x `mod` 5 == 0 then "FizzBuzz"
+      else if x `mod` 3 == 0 then "Fizz"
+      else if x `mod` 5 == 0 then "Buzz"
+      else (show x))) xs
