@@ -98,3 +98,39 @@ negativeThreeElemNums = -3 `elem` nums -- This is True
 
 -- Type of "elem":
 -- elem :: (Foldable t, Eq a) => a -> t a -> Bool
+
+-- Range syntax:
+oneToTwenty = [1..20] -- This is 20 elements, first one being 1 and last one 20.
+
+-- Characters can be in a sequence:
+charsSeq = ['a'..'n']
+
+-- Going from capital 'A' to lowercase 'z' includes ASCII characters between the two cases:
+-- Here is "ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz"
+allLetters = ['A'..'z']
+
+-- Ranges with a step: Specify the first two elements (separated by a comma) and then .. and the last element.
+-- This list starts at 1, then has 3 and every other number until an including 17.
+rangeWithStep = [1,3..17]
+
+-- In a range with a step, the upper bound number need not actually end up in the resultant list, if
+-- it is not a multiple of the offset step.
+range2 = [2,4..9] -- This is [2,4,6,8]
+
+-- To get a decreasing list using a range, give the first two elements and then the range to the lowest element.
+decreasingRange = [20,19..1]
+
+-- An infinite list can be specified using a range without an upper bound:
+-- Don't try to evaluate it in GHCI.
+unboundedList = [5..]
+
+-- Laziness on display: Call the "take" function with an infinite list, but ask for only some of the elements.
+-- This returns just the first 7 elements:
+takeOnlySome = take 7 [5..]
+
+-- The function "cycle" takes a list and repeats it infinitely.
+-- Don't try to evaluate this in GHCI.
+cycleMyList = cycle [2, 67, 23]
+
+-- But if you take only some elements, it does what you expect:
+cycleTakeSome = take 15 (cycle [2, 67, 23])
