@@ -46,3 +46,12 @@ zippedLists2 = zip ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"] [1..7]
 
 -- You can even zip a finite list with an infinite list.
 zipFinInf = zip [5, 62, 89] [1..]
+
+-- triangles is all triangles with edges of integer length no greater than 10.
+triangles = [(a, b, c) | a <- [1..10], b <- [1..10], c <- [1..10]]
+
+distinctTriangles = [(a, b, c) | a <- [1..10], b <- [1..a], c <- [1..b]]
+
+rightTriangles = [(a, b, c) | a <- [1..10], b <- [1..a], c <- [1..b], b^2 + c^2 == a^2]
+
+rightTrianglesPerim24 = [(a, b, c) | a <- [1..10], b <- [1..a], c <- [1..b], b^2 + c^2 == a^2, a + b + c == 24]
