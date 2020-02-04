@@ -67,3 +67,65 @@ readAsFloat = read "67" :: Float
 
 -- You can even read a tuple:
 readTuple = read "('x', 87.2)" :: (Char, Double)
+
+-- Members of the "Enum" class are considered to be enumerable (sequentially ordered).
+-- The "succ" and "pred" functions can be used on "Enum" values.
+-- You can use an Enum value in the starting or end position of a list range.
+
+-- Some types that are in the Enum class: Char, Int, Float
+-- The succ of False is True.
+
+succChar = succ 'g'
+succInt = succ 45
+succFloat = succ 45 -- This is the Integer 46
+succBoolF = succ False
+
+-- Successors of floating point numbers:
+succFloatDecimal = succ (56.8 :: Float) -- This is 57.8
+succFloatDecimal2 = succ (53.7001 :: Double) -- This is 54.7001
+
+-- Enumerating Enums:
+orderingOptions = [LT .. GT] -- There need to be spaces around the ".." here.
+
+-- Members of the "Bounded" class have a lower and upper bound.
+-- The Int type is Bounded:
+minIntVal = minBound :: Int
+-- The type annotation is needed here because several different types have
+-- a minBound values. Same goes for maxBound:
+maxIntVal = maxBound :: Int
+
+-- Chars are bounded:
+minChar = minBound :: Char
+maxChar = maxBound :: Char
+
+-- So "minBound" and "maxBound" are in some sense polymorphic constants.
+
+-- A tuple is Bounded if all its components are Bounded.
+boundedTuple = maxBound :: (Int, Char)
+
+-- Members of the "Num" class can act like numbers.
+
+-- An integer constant can act (or go in the place of) any type that's a member
+-- of the Num typeclass.
+-- So if you do ":t 35" in GHCI you get: 35 :: Num p => p
+-- Similarly for floating point numbers, which are Fractional:
+-- If you do ":t 45.9" in GHCI you get: 45.9 :: Fractional p => p
+
+-- The multiplication function (*) takes any two Num values.
+
+-- Members of the "Integral" class are integer types, including Int and Integer.
+-- Members of the "Floating" class are floating point numbers, including Float and Double.
+
+-- The function "fromIntegral" takes an Integral and returns the value as the more general Num. Its type:
+-- fromIntegral :: (Integral a, Num b) => a -> b
+
+-- If you do ":t fromIntegral (5 :: Integer)" in GHCI you get:
+-- fromIntegral (5 :: Integer) :: Num b => b
+
+-- Yet checking the type of the following in GHCI gives "Integer":
+num5FromInt = fromIntegral (5 :: Int)
+
+-- Because you can't do "(length [1,5]) + 8.0" because that would be Int+Float you can
+-- instead do:
+usingFromIntegral = fromIntegral (length [1,5]) + 8.0
+-- Here fromIntegral is being called with just an Int.
