@@ -129,3 +129,23 @@ num5FromInt = fromIntegral (5 :: Int)
 -- instead do:
 usingFromIntegral = fromIntegral (length [1,5]) + 8.0
 -- Here fromIntegral is being called with just an Int.
+
+-- Functions and pattern matching.
+-- The patterns here are checked top to bottom, so if the "x" case were moved to be first it would
+-- match all the possible arguments and none of the others would match.
+sayNumber :: Integral n => n -> String
+sayNumber (-1) = "Invalid number!"
+sayNumber 0 = "Zero"
+sayNumber 1 = "One"
+sayNumber x = "Something else"
+
+factorialRec :: Integral a => a -> a
+factorialRec 0 = 1
+factorialRec n = n * factorialRec (n-1)
+
+-- A function can be defined with just explicit patterns to match and no general catch-all.
+-- Try to call this with an integer that doesn't have a defined function.
+fn1 :: Integral n => n -> String
+fn1 (-5) = "Neg 5"
+fn1 0 = "Zero"
+fn1 78 = "Seventy-eight"
