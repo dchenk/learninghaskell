@@ -149,3 +149,33 @@ fn1 :: Integral n => n -> String
 fn1 (-5) = "Neg 5"
 fn1 0 = "Zero"
 fn1 78 = "Seventy-eight"
+
+-- Pattern matching of tuples as function parameters:
+addVectors :: Num a => (a, a) -> (a, a) -> (a, a)
+addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2)
+
+showTup :: (Show a, Show b) => (a, a, b) -> (String, String, String)
+showTup (a, b, c) = (show a, show b, show c)
+
+-- Extract the third component of a triple:
+third (_, _, z) = z
+
+-- Pattern matching in list comprehensions:
+--                              HERE
+patternListComp = [x + y + 1 | (x, y) <- [(2, 5), (4, 4), (7, 3)]]
+
+-- Pattern matching a list: extract the first element and the remaining elements.
+-- This function works (destructuring a list) only if the list has at least one element.
+listFn (x:xs) = ("First: " ++ show x, "Tail: " ++ show xs)
+
+-- To match against lists that have, e.g., three elements or more:
+listFn2 (x:y:z:rem) = (x, y, z)
+-- If this function is called with a list that has fewer than three elements, there will be a runtime exception.
+
+-- This function can be called only with a list that has exactly two elements.
+fnMatchExactly2 (a:b:[]) = (a, b)
+
+-- Another way to match a list with a specific number of elements:
+fnMatchExactly2Brackets [a, b] = (a, b)
+
+fnMatchExactly1Brackets [a] = a
