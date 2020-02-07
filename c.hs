@@ -179,3 +179,34 @@ fnMatchExactly2 (a:b:[]) = (a, b)
 fnMatchExactly2Brackets [a, b] = (a, b)
 
 fnMatchExactly1Brackets [a] = a
+
+-- You can pattern match and still have access to the full value.
+headTailAll :: Num a => [a] -> (a, [a], [a])
+headTailAll [] = (0, [], [])
+headTailAll nums@(x:rest) = (x, rest, nums)
+
+-- Concatenate two lists (elements of any type) using the ++ operator:
+concatLists = [1, 4, 23] ++ [25, 92]
+
+-- "otherwise" is a boolean constant of the value "True"
+otherwiseIsTrue = otherwise == True
+
+-- Guards in functions can be sort of another way to pattern match.
+ageDescription x
+  | x < 18 = "You're a kid"
+  | x < 25 = "You're a young adult"
+  | x >= 90 = "You're old"
+  | otherwise = "You're about average"
+
+-- Guards are evaluated in the order in which they appear.
+ageDescription2 x
+  | x < 1 || x >= 1 = "This will always be the result"
+  | otherwise = "This pattern will never be matched because the first one covers all cases"
+
+-- You can combine guards with pattern matching. If none of the guards are satisfied, then following
+-- patterns are checked.
+saySomething x
+  | length x == 3 = "The list has length 3."
+  | length x > 50 = "The list is long."
+
+saySomething [first] = "The list has one element: " ++ show first
