@@ -210,3 +210,39 @@ saySomething x
   | length x > 50 = "The list is long."
 
 saySomething [first] = "The list has one element: " ++ show first
+
+-- myMin returns the smallest (or lowest) of three values.
+myMin :: Ord a => a -> a -> a -> a
+myMin x y z
+  | x < y && x < z = x
+  | y < x && y < z = y
+  | otherwise      = z
+
+-- Defining a function using the infix form.
+myMin2 :: Ord a => a -> a -> a
+x `myMin2` y
+  | x < y     = x
+  | otherwise = y
+
+-- Using "where"
+f x y z = x * val
+  where val = y - z + 5
+
+-- Multiple declarations under "where" and pattern matching.
+f2 x y = x * val + otherVal + length rest
+  where
+    val = x - y + 5
+    (otherVal:rest) = [3..8]
+
+nameInitials :: String -> String -> String
+nameInitials firstName lastName =
+  "Your initials: " ++ [f] ++ "." ++ [l] ++ "."
+  where
+    (f:_) = firstName
+    (l:_) = lastName
+
+-- Function as a "where" declaration.
+nameInitials2 :: String -> String -> String
+nameInitials2 firstName lastName =
+  "Your initials: " ++ initial firstName ++ initial lastName
+  where initial x = [head x] ++ "."
