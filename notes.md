@@ -29,6 +29,23 @@ Enable the type application extension by doing `:set -XTypeApplications`.
 ## `length`
 `length :: Foldable t => t a -> Int`
 
+## `minBound`
+The lowest value of a `Bounded` type.
+
+## `maxBound`
+The greatest value of a `Bounded` type.
+
+## `scanl`
+`scanl :: (b -> a -> b) -> b -> [a] -> [b]`
+Cumulative operation, similar to `foldl` but returns a list of length one greater than the length of the input
+list where the values are successively reduced left to right.
+
+Example:
+```
+cumulativeSum = scanl (+) 0 [1, 1, 1]
+-- Result is [0, 1, 2, 3]
+```
+
 # Types and Classes
 
 ## `Ordering`

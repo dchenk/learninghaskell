@@ -12,3 +12,5 @@ data Size =
   deriving (Show, Bounded, Enum)
 
 allSizes = [minBound @Size .. maxBound @Size]
+
+maxInt = maxBound @Int
